@@ -1,0 +1,20 @@
+name: Pilot feedback
+description: You tried Data-Align on a migration (or demo) - tell me how it went
+labels: ["pilot"]
+body:
+  - type: markdown
+    attributes:
+      value: "Please keep it free of real customer data. Table names and counts are fine."
+  - type: dropdown
+    id: ran
+    attributes: {label: How far did you get?, options: [Could not install, Ran the demo only, Ran on my own non-sensitive data, Ran on a real migration copy]}
+    validations: {required: true}
+  - type: textarea
+    id: found
+    attributes: {label: Did it find anything real? Did it flag anything wrongly?}
+  - type: textarea
+    id: confusing
+    attributes: {label: What was confusing or missing?}
+  - type: dropdown
+    id: use
+    attributes: {label: Would the report be usable as sign-off evidence?, options: [Yes, With changes, No]}
