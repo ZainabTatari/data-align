@@ -11,6 +11,8 @@ Every case ends as **PASS, FAIL, REVIEW or NOT_TESTED**, and the whole run as **
 > Version **0.9.0**. Honest status, including what is *not* built yet: [docs/STATUS.md](docs/STATUS.md).
 > Reports never contain raw data values; PII is compared as HMAC-SHA-256 tokens; the AI only ever sees results, never rows.
 
+**New here and non-technical? Read [START_HERE.md](START_HERE.md).**
+
 ## Who is this for?
 Teams that must **prove** a data migration was correct - for example insurance, utilities and healthcare - and need repeatable sign-off evidence, not just "it looked fine". Works with SQLite, CSV files and PostgreSQL.
 
