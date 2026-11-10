@@ -274,3 +274,168 @@ class Primitives(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+# ---- PostgreSQL connector (skipped when pg8000 or a server is unavailable) ----
+def _pg_dsn():
+    dsn = os.environ.get("DATAALIGN_TEST_PG_DSN")
+    if not dsn:
+        return None
+    try:
+        import pg8000.dbapi  # noqa
+        import pg_support
+        pg_support.pg_conn(dsn).close()
+    except Exception:
+        return None
+    return dsn
+
+
+@unittest.skipUnless(_pg_dsn(), "needs pg8000 and DATAALIGN_TEST_PG_DSN pointing at a PostgreSQL server")
+class Postgres(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        import pg_support
+        cls.dsn = _pg_dsn(); os.environ["DA_PG_DSN"] = cls.dsn
+        cls.tmp = tempfile.mkdtemp()
+        cls.pg_support = pg_support
+
+    def _cfg(self, s, t, ss, ts):
+        cfg = fixtures.demo_config(s, t)
+        cfg["source"] = {"type": "postgres", "dsn_env": "DA_PG_DSN", "schema": ss}
+        cfg["target"] = {"type": "postgres", "dsn_env": "DA_PG_DSN", "schema": ts}
+        return cfg
+
+    def _both(self, defective):
+        s, t = fixtures.build_pair(self.tmp, defective)
+        tag = "d" if defective else "c"
+        self.pg_support.load(s, self.dsn, f"t_src_{tag}"); self.pg_support.load(t, self.dsn, f"t_tgt_{tag}")
+        a = run(fixtures.demo_config(s, t)); b = run(self._cfg(s, t, f"t_src_{tag}", f"t_tgt_{tag}"))
+        return a, b
+
+    def test_clean_pair_matches_sqlite(self):
+        (fa, oa), (fb, ob) = self._both(False)
+        self.assertEqual(ob, "PASS")
+        self.assertEqual(status(fa), status(fb))
+
+    def test_defective_pair_matches_sqlite(self):
+        (fa, oa), (fb, ob) = self._both(True)
+        self.assertEqual(ob, "FAIL")
+        self.assertEqual(status(fa), status(fb))
+
+    def test_connection_string_never_in_config(self):
+        from dataalign.db import connect
+        with self.assertRaises(Exception):
+            connect({"type": "postgres", "dsn": "postgresql://u:p@h/db", "schema": "x"}, 5)
+
+    def test_readonly_enforced(self):
+        from dataalign.db import connect
+        d = connect({"type": "postgres", "dsn_env": "DA_PG_DSN", "schema": "t_src_c"}, 5)
+        try:
+            self.assertFalse(d.write_probe())
+            with self.assertRaises(Exception):
+                d._exec('CREATE TABLE "t_src_c".zz (a int)')
+        finally:
+            d.close()
+
+    def _native(self):
+        s, t = fixtures.build_pair(self.tmp, False)
+        ov = {("policies", "premium"): "numeric(10,2)", ("policies", "start_date"): "date",
+              ("policies", "updated_at"): "timestamp", ("claims", "amount"): "numeric(12,2)",
+              ("claims", "claim_date"): "date", ("claims", "updated_at"): "timestamp"}
+        self.pg_support.load(s, self.dsn, "t_nsrc", ov); self.pg_support.load(t, self.dsn, "t_ntgt", ov)
+        return s, t
+
+    def test_native_types_both_sides_clean_pass(self):
+        """Realistic case: NUMERIC/DATE/TIMESTAMP on both sides, clean copy -> PASS."""
+        s, t = self._native()
+        cfg = self._cfg(s, t, "t_nsrc", "t_ntgt"); cfg.pop("baseline_schema", None)   # demo baseline describes text columns
+        f, o = run(cfg)
+        bad = {k: (v["status"], v["message"][:120]) for k, v in f.items() if v["status"] in ("FAIL", "REVIEW")}
+        self.assertEqual(bad, {})                          # nothing failed / needs review
+        self.assertIn(o, ("PASS", "INCOMPLETE"))           # INCOMPLETE only because no baseline schema was supplied
+
+    def test_text_to_native_type_change_is_flagged(self):
+        """Migrating text columns into NUMERIC/DATE must be reported as a type change, never silently PASS."""
+        s, t = fixtures.build_pair(self.tmp, False)
+        ov = {("policies", "premium"): "numeric(10,2)", ("policies", "start_date"): "date"}
+        self.pg_support.load(t, self.dsn, "t_x2n", ov)
+        cfg = fixtures.demo_config(s, t)
+        cfg["target"] = {"type": "postgres", "dsn_env": "DA_PG_DSN", "schema": "t_x2n"}
+        f, o = run(cfg)
+        self.assertNotEqual(o, "PASS")
+        self.assertIn(f["M03"]["status"], ("FAIL", "REVIEW"))
+
+
+class ApiWrapper(unittest.TestCase):
+    def test_demo_audit_returns_safe_summary(self):
+        from dataalign.api import demo_audit
+        r = demo_audit(tempfile.mkdtemp())
+        self.assertEqual(r["overall"], "FAIL")
+        self.assertEqual(set(r["counts"]), {"PASS", "FAIL", "REVIEW", "NOT_TESTED"})
+        self.assertTrue(os.path.exists(r["report_html"]))
+        self.assertNotIn("user1@example.com", json.dumps(r))
+
+
+class EasyMode(unittest.TestCase):
+    def _sides(self, defective):
+        from dataalign.easy import run_easy
+        d = tempfile.mkdtemp(); s, t = fixtures.build_pair(d, defective)
+        for side, p in (("old", s), ("new", t if defective else s)):
+            os.makedirs(f"{d}/my/{side}"); shutil.copy(p, f"{d}/my/{side}/x.db")
+        return d, run_easy
+
+    def test_identical_data_has_no_failures(self):
+        d, run_easy = self._sides(False)
+        rep, _ = run_easy(f"{d}/my", f"{d}/o", open_report=False, say=lambda *a: None)
+        self.assertEqual(rep["summary"].get("FAIL", 0), 0)
+        self.assertNotEqual(rep["overall"], "PASS")        # unknown rules/evidence -> honest INCOMPLETE
+
+    def test_changed_data_fails(self):
+        d, run_easy = self._sides(True)
+        rep, _ = run_easy(f"{d}/my", f"{d}/o", open_report=False, say=lambda *a: None)
+        self.assertEqual(rep["overall"], "FAIL")
+
+    def test_csv_and_friendly_errors(self):
+        from dataalign.easy import run_easy, EasyError
+        d = tempfile.mkdtemp()
+        with self.assertRaises(EasyError): run_easy(f"{d}/nope", f"{d}/o", open_report=False, say=lambda *a: None)
+        for side, extra in (("old", "3,c"), ("new", "3,X")):
+            os.makedirs(f"{d}/m/{side}")
+            open(f"{d}/m/{side}/t.csv", "w").write("id,v\n1,a\n2,b\n" + extra + "\n")
+        rep, _ = run_easy(f"{d}/m", f"{d}/o", open_report=False, say=lambda *a: None)
+        self.assertGreater(rep["summary"].get("FAIL", 0), 0)
+
+
+class EasyRules(unittest.TestCase):
+    def _setup(self, rules_text):
+        d = tempfile.mkdtemp(); s, t = fixtures.build_pair(d, True)
+        for side, p in (("old", s), ("new", t)):
+            os.makedirs(f"{d}/my/{side}"); shutil.copy(p, f"{d}/my/{side}/x.db")
+        open(f"{d}/my/rules.csv", "w").write(rules_text)
+        return d
+
+    def test_rules_csv_is_applied_and_catches_violation(self):
+        from dataalign.easy import run_easy
+        d = self._setup(open(os.path.join(os.path.dirname(__file__), "..", "mydata", "rules_example.csv")).read())
+        rep, _ = run_easy(f"{d}/my", f"{d}/o", open_report=False, say=lambda *a: None)
+        st = {f["id"]: f["status"] for f in rep["findings"]}
+        self.assertEqual(st["Q04"], "FAIL"); self.assertEqual(st["Q02"], "PASS")
+
+    def test_rules_csv_friendly_errors(self):
+        from dataalign.easy import run_easy, EasyError
+        for bad, msg in (("policies,nope,required,,\n", "line 2"), ("policies,status,betwen,1 to 2,\n", "betwen"),
+                         ("policies,premium,between,abc,\n", "between"), ("nothere,x,required,,\n", "nothere")):
+            d = self._setup("table,column,rule,value\n" + bad)
+            with self.assertRaises(EasyError) as cm:
+                run_easy(f"{d}/my", f"{d}/o", open_report=False, say=lambda *a: None)
+            self.assertIn(msg, str(cm.exception))
+
+
+class EasyApi(unittest.TestCase):
+    def test_easy_audit_summary(self):
+        from dataalign.api import easy_audit
+        d = tempfile.mkdtemp(); s, t = fixtures.build_pair(d, True)
+        for side, p in (("old", s), ("new", t)):
+            os.makedirs(f"{d}/my/{side}"); shutil.copy(p, f"{d}/my/{side}/x.db")
+        r = easy_audit(f"{d}/my", f"{d}/o")
+        self.assertEqual(r["overall"], "FAIL"); self.assertTrue(os.path.exists(r["report_html"]))

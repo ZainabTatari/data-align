@@ -49,10 +49,16 @@ def main(argv=None):
     d = sub.add_parser("demo", help="run on built-in synthetic data (clean and defective)"); d.add_argument("--out", default="dataalign_output"); d.add_argument("--ai", action="store_true"); d.add_argument("--pdf", action="store_true")
     r = sub.add_parser("run", help="audit your own databases"); r.add_argument("--config", required=True); r.add_argument("--suite"); r.add_argument("--out", default="dataalign_output")
     r.add_argument("--resume", action="store_true"); r.add_argument("--ai", action="store_true"); r.add_argument("--pdf", action="store_true"); r.add_argument("--model", default="qwen2.5:7b")
+    e = sub.add_parser("easy", help="beginner mode: audit the data in mydata/old and mydata/new"); e.add_argument("--folder", default="mydata"); e.add_argument("--out", default="my_report"); e.add_argument("--no-open", action="store_true")
     sub.add_parser("list-cases", help="show all test cases")
     i = sub.add_parser("init-suite", help="write a suite file you can edit"); i.add_argument("path")
     a = p.parse_args(argv)
     if a.cmd == "demo": demo(a.out, a.ai, a.pdf); return 0
+    if a.cmd == "easy":
+        from .easy import run_easy, EasyError
+        try: rep, _ = run_easy(a.folder, a.out, open_report=not a.no_open)
+        except EasyError as ex: print("\nCannot start: " + str(ex)); return 2
+        return 0 if rep["overall"] == "PASS" else 1
     if a.cmd == "run":
         cfg = json.load(open(a.config, encoding="utf-8"))
         suite = json.load(open(a.suite, encoding="utf-8")) if a.suite else default_suite()

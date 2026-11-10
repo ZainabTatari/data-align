@@ -6,7 +6,7 @@ from .core import (case, ok, fail, review, not_tested, verdict, Result, PASS, FA
 from .checks_a import each, _matched, num
 from .checks_b import expected_equal, spec_by_source
 from .context import values_equal
-from .db import q, DB
+from .db import q, DB, connect
 from .mapping import type_class
 from . import pii as P
 
@@ -289,9 +289,14 @@ def rs01(ctx):
 @case("RS02", 23, "Unavailable target fails loudly (never silently creates an empty database)")
 def rs02(ctx):
     try:
-        DB(os.path.join(tempfile.gettempdir(), "dataalign_does_not_exist.db")).tables()
-    except Exception: return ok("Missing database raised an error")
-    return fail("Missing database was opened without error")
+        if ctx.tgt.dialect == "postgres":
+            import os
+            os.environ["_DATAALIGN_DEAD"] = "postgresql://u:p@127.0.0.1:1/none"
+            connect({"type": "postgres", "dsn_env": "_DATAALIGN_DEAD"}, 1).tables()
+        else:
+            DB(os.path.join(tempfile.gettempdir(), "dataalign_does_not_exist.db")).tables()
+    except Exception: return ok("Unreachable/missing database raised an error")
+    return fail("Unreachable/missing database was opened without error")
 
 @case("RS03", 23, "Corrupted input fails cleanly")
 def rs03(ctx):
@@ -305,9 +310,9 @@ def rs03(ctx):
 
 @case("RS04", 23, "Query timeouts are enforced")
 def rs04(ctx):
-    d = DB(ctx.cfg["source"], 0.05); t0 = time.time()
+    d = connect(ctx.cfg["source"], 0.05); t0 = time.time()
     try:
-        d.scalar("WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM c WHERE x<500000000) SELECT count(*) FROM c")
+        d.scalar(d.runaway_sql)
     except Exception:
         return ok(f"Runaway query interrupted after {time.time()-t0:.2f}s")
     finally: d.close()

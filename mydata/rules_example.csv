@@ -1,0 +1,7 @@
+table,column,rule,value,applies_to
+policies,policy_id,required,,new
+policies,status,allowed values,"ACTIVE,CLOSED",new
+policies,status,old to new,"A=ACTIVE, C=CLOSED",
+policies,premium,between,0 to 99999999.99,new
+policies,email,looks like email,,new
+policies,start_date,is a date,,new

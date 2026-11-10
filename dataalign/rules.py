@@ -10,6 +10,12 @@ def valid_date(v):
         return False
 
 def valid_ts(v):
+    s = str(v)
+    if len(s) > 10 and s[:10].count("-") == 2:      # fractional seconds / offsets (e.g. from PostgreSQL)
+        try:
+            datetime.fromisoformat(s.replace("Z", "+00:00")); return True
+        except Exception:
+            return False
     for f in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d"):
         try:
             datetime.strptime(str(v), f); return True

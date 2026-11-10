@@ -347,14 +347,7 @@ def pr04(ctx):
 # ---- 15 Security --------------------------------------------------------
 @case("S01", 15, "Source and target connections are read-only")
 def s01(ctx):
-    import sqlite3
-    bad = []
-    for name, db in (("source", ctx.src), ("target", ctx.tgt)):
-        try:
-            db.conn.execute("CREATE TABLE _dataalign_write_probe(x)")
-            bad.append((name, "WRITE SUCCEEDED"))
-            db.conn.execute("DROP TABLE _dataalign_write_probe")
-        except sqlite3.OperationalError: pass
+    bad = [(name, "WRITE SUCCEEDED") for name, db in (("source", ctx.src), ("target", ctx.tgt)) if db.write_probe()]
     return verdict(bad, "Both connections reject writes", "Connection is writable")
 
 @case("S02", 15, "Reports/evidence contain no raw PII or secrets")
@@ -370,6 +363,7 @@ def s03(ctx):
     import json
     txt = json.dumps(ctx.cfg_public(), default=str)
     bad = [("config", f"secret pattern {c}") for c in P.classify_text(txt) if c in P.SECRET_CLASSES]
+    if re.search(r"://[^/\s:@]+:[^@\s]+@", txt): bad.append(("config", "connection URL with embedded password (use dsn_env)"))
     for key in ctx.cfg:
         if re.search(r"pass|secret|token|api_?key|hmac_key", key, re.I) and key != "hmac_key_env": bad.append(("config", f"key '{key}' present"))
     return verdict(bad, "Configuration holds no secrets", "Secrets in configuration")

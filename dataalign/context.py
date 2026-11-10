@@ -1,7 +1,7 @@
 """Run context: config, connections, table specs, cached row loading, transforms."""
 import datetime, hashlib, json, os, time
 from decimal import Decimal
-from .db import DB, q
+from .db import DB, q, connect
 from .normalize import parse_decimal, quantize, norm_text, row_hash
 from . import __version__
 
@@ -31,8 +31,8 @@ def values_equal(a, b, numeric):
 class Context:
     def __init__(self, cfg, hmac_key=None, out_dir=None):
         self.cfg = cfg
-        self.src = DB(cfg["source"], cfg.get("query_timeout_s", 30))
-        self.tgt = DB(cfg["target"], cfg.get("query_timeout_s", 30))
+        self.src = connect(cfg["source"], cfg.get("query_timeout_s", 30))
+        self.tgt = connect(cfg["target"], cfg.get("query_timeout_s", 30))
         self.hmac_key = hmac_key if hmac_key is not None else os.environ.get(cfg.get("hmac_key_env", "DATAALIGN_HMAC_KEY"))
         self.now = datetime.datetime.strptime(cfg["as_of"], "%Y-%m-%d %H:%M:%S") if cfg.get("as_of") else datetime.datetime.utcnow()
         self.run_id = "run-" + hashlib.sha256(f"{time.time_ns()}".encode()).hexdigest()[:12]

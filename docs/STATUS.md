@@ -48,3 +48,14 @@ Cases verified only by their own self-test (no planted data defect makes them fa
 - No clickable web UI/dashboard. The "UI" is the command line plus the HTML/CSV/JSON report (PDF via Gotenberg, unverified).
 - Test-case management (active/inactive, mandatory, dependencies, suites, custom SQL cases) is done through a JSON suite file, not a screen.
 - Overall approval needs a human; the tool never approves a migration by itself.
+
+## PostgreSQL connector (added in 0.9.x)
+- **Verified:** the clean and defective test pairs were loaded into a real PostgreSQL 16 server; all 92 case results are identical to the SQLite run. Native NUMERIC/DATE/TIMESTAMP on both sides passes with no failures or review items. A text-to-native type change is reported (not silently passed).
+- **Optional dependency:** `pip install pg8000` (pure Python). The engine itself is still standard-library only; SQLite needs nothing extra.
+- **Safety:** connection URL only via an environment variable (`dsn_env`); session set to read-only with a statement timeout; write probe confirms the account cannot write.
+- **Fingerprint:** PostgreSQL has no file to hash, so the report records a schema + row-count SHA-256 (kind shown in the report), not a content hash of the whole database.
+- **Not verified:** other PostgreSQL versions, very large tables, SSL options, other databases (MySQL, SQL Server, Oracle).
+
+## Langflow integration
+- **Verified:** custom component builds and runs in Langflow 1.13; flow (Data-Align box -> Chat Output) returned the correct summary for the demo data, and for easy mode with rules.csv (identical numbers to the batch-file route).
+- **Not verified:** other versions, own-database config run from Langflow. Langflow is optional; the engine does not need it.

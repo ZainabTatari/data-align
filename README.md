@@ -1,6 +1,6 @@
 # Data-Align
 
-[![tests](https://github.com/ZainabTatari/data-align/actions/workflows/tests.yml/badge.svg)](https://github.com/ZainabTatari/data-align/actions)
+[![tests](https://github.com/YOUR-USERNAME/data-align/actions/workflows/tests.yml/badge.svg)](https://github.com/YOUR-USERNAME/data-align/actions)
 
 **An open-source data-migration auditor. Deterministic checks prove; AI only explains.**
 
@@ -18,7 +18,7 @@ compliance evidence. Every case ends as **PASS, FAIL, REVIEW or NOT_TESTED**, an
 
 Windows: double-click **`run-demo.bat`**, or in PowerShell inside this folder:
 ```powershell
-docker run --rm -v "${PWD}:/app" -w /app python:3.12-slim python -m dataalign demo --out dataalign_output
+python -m dataalign demo --out dataalign_output   # or, with Docker running: docker run --rm -v "${PWD}:/app" -w /app python:3.12-slim python -m dataalign demo --out dataalign_output
 ```
 With Python 3.11+ already installed: `python -m dataalign demo`
 
@@ -43,10 +43,23 @@ python -m dataalign run --config my_config.json --suite my_suite.json --out resu
 - **Not legal advice.** Compliance checks verify technical evidence references only.
 
 ## Tests
-`python -m unittest discover -s tests -v` (67 tests; passes on Python 3.11, 3.12, 3.13). See [docs/STATUS.md](docs/STATUS.md) for what they prove.
+`python -m unittest discover -s tests -v` (80 tests; 6 of them need a PostgreSQL server and skip otherwise; passes on Python 3.11, 3.12, 3.13). See [docs/STATUS.md](docs/STATUS.md) for what they prove.
 
 ## Langflow visual flow
 The original no-code flow (Langflow + Ollama + Gotenberg) is described in [docs/GUIDE.md](docs/GUIDE.md); it is
 optional and **not yet verified end to end** against this engine.
 
 License: MIT. Contributing: [CONTRIBUTING.md](CONTRIBUTING.md).
+
+
+## Audit your own data (no coding)
+Put old data in `mydata/old`, new data in `mydata/new` (a `.db` file or CSV files), double-click `run-mydata.bat`. Details: [docs/EASY_MODE.md](docs/EASY_MODE.md). To add your own business rules: [docs/BUSINESS_RULES.md](docs/BUSINESS_RULES.md).
+
+## Optional: use it from Langflow
+Prefer clicking to typing? Import the ready-made flow from [integrations/langflow](integrations/langflow/README.md) and run the audit from a Langflow canvas. It can audit the demo data or your own `mydata` folder (with `rules.csv`). Tested on Langflow 1.13.
+
+## Who is this for?
+Teams that must **prove** a data migration was correct - for example insurance, utilities and healthcare - and need repeatable sign-off evidence, not just "it looked fine". Supports SQLite and PostgreSQL (`pip install pg8000`).
+
+## Feedback welcome
+Data-Align was built by a **tester, not a developer**, with AI assistance. The checks are deterministic and tested (see `docs/STATUS.md` for what is and is not covered). Corrections, bug reports and pilot feedback are very welcome - open an issue or see `docs/PILOT.md`. MIT licensed.

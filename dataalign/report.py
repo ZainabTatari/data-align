@@ -30,7 +30,8 @@ def build_report(ctx, suite, findings, overall, interim=False):
         cats.append({"number": n, "name": name, "cases": len(fs), **{s: sum(1 for f in fs if f["status"] == s) for s in (PASS, FAIL, REVIEW, NOT_TESTED)}})
     return {"run_id": ctx.run_id, "tool_version": __version__, "normalization_version": NORMALIZATION_VERSION,
             "suite": {"name": suite.get("name"), "version": suite.get("version")}, "as_of": ctx.now.strftime("%Y-%m-%d %H:%M:%S"),
-            "config_sha256": cfg_sha, "source_sha256": _sha(ctx.cfg["source"]), "target_sha256": _sha(ctx.cfg["target"]),
+            "config_sha256": cfg_sha, "source_sha256": ctx.src.fingerprint()[0], "target_sha256": ctx.tgt.fingerprint()[0],
+            "source_fingerprint_kind": ctx.src.fingerprint()[1], "target_fingerprint_kind": ctx.tgt.fingerprint()[1],
             "overall": overall, "decision": DECISION.get(overall, "Interim snapshot"), "interim": interim,
             "summary": dict(by), "categories": cats, "findings": findings,
             "disclaimer": DISCLAIMER, "limitations": LIMITATIONS, "ai_commentary": None}
