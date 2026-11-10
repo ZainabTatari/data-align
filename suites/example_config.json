@@ -1,0 +1,306 @@
+{
+  "source": "source.db",
+  "target": "target.db",
+  "as_of": "2025-01-01 00:00:00",
+  "hmac_key_env": "DATAALIGN_HMAC_KEY",
+  "query_timeout_s": 30,
+  "source_system": "demo-legacy-sqlite",
+  "target_system": "demo-cloud-sqlite",
+  "batch_id": "BATCH-2025-01-01",
+  "snapshot_id": "SNAP-001",
+  "transform_version": "T-1.0",
+  "retention_days": 365,
+  "mapping": {
+    "approved": true,
+    "version": "1.0",
+    "approved_by": "qa.lead",
+    "approved_type_changes": []
+  },
+  "evidence": {
+    "encryption_at_rest": "DOC-ENC-001",
+    "encryption_in_transit": "DOC-TLS-002"
+  },
+  "compliance": {
+    "gdpr": {
+      "lawful_basis_ref": "LB-12",
+      "retention_days": 365,
+      "dsar_process_ref": "DSAR-3"
+    },
+    "ccpa": {
+      "opt_out_ref": "OPT-1",
+      "deletion_ref": "DEL-2"
+    }
+  },
+  "cdc": {
+    "table": "claims",
+    "log_table": "change_log",
+    "watermark_table": "_watermark"
+  },
+  "baseline_schema": {
+    "policies": {
+      "policy_id": "INTEGER",
+      "customer_name": "TEXT",
+      "email": "TEXT",
+      "ssn": "TEXT",
+      "premium": "TEXT",
+      "start_date": "TEXT",
+      "status": "TEXT",
+      "updated_at": "TEXT",
+      "notes": "TEXT"
+    },
+    "claims": {
+      "claim_id": "INTEGER",
+      "policy_id": "INTEGER",
+      "amount": "TEXT",
+      "claim_date": "TEXT",
+      "status": "TEXT",
+      "description": "TEXT",
+      "updated_at": "TEXT",
+      "claim_ref": "TEXT"
+    }
+  },
+  "tables": [
+    {
+      "source": "policies",
+      "target": "policies",
+      "pk": [
+        "policy_id"
+      ],
+      "business_key": [
+        "email"
+      ],
+      "columns": {
+        "policy_id": "policy_id",
+        "holder_name": "customer_name",
+        "email": "email",
+        "ssn": "ssn",
+        "premium": "premium",
+        "start_date": "start_date",
+        "status": "status",
+        "updated_at": "updated_at",
+        "notes": "notes"
+      },
+      "transforms": {
+        "status": {
+          "kind": "map",
+          "values": {
+            "A": "ACTIVE",
+            "C": "CLOSED"
+          }
+        }
+      },
+      "decimals": {
+        "premium": 2
+      },
+      "precision": {
+        "premium": [
+          10,
+          2
+        ]
+      },
+      "dates": [
+        "start_date",
+        "updated_at"
+      ],
+      "updated_col": "updated_at",
+      "partition": "status",
+      "distinct": [
+        "status"
+      ],
+      "required": [
+        "policy_id",
+        "email",
+        "start_date"
+      ],
+      "rules": {
+        "email": [
+          {
+            "kind": "regex",
+            "pattern": "[^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}",
+            "examples": {
+              "valid": [
+                "a@b.co"
+              ],
+              "invalid": [
+                "not-an-email"
+              ]
+            }
+          }
+        ],
+        "status": [
+          {
+            "kind": "in_set",
+            "values": [
+              "A",
+              "C"
+            ]
+          }
+        ],
+        "premium": [
+          {
+            "kind": "range",
+            "min": "0",
+            "max": "99999999.99"
+          }
+        ],
+        "start_date": [
+          {
+            "kind": "date"
+          }
+        ]
+      },
+      "target_rules": {
+        "email": [
+          {
+            "kind": "regex",
+            "pattern": "[^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}",
+            "examples": {
+              "valid": [
+                "a@b.co"
+              ],
+              "invalid": [
+                "not-an-email"
+              ]
+            }
+          }
+        ],
+        "status": [
+          {
+            "kind": "in_set",
+            "values": [
+              "ACTIVE",
+              "CLOSED"
+            ]
+          }
+        ],
+        "premium": [
+          {
+            "kind": "range",
+            "min": "0",
+            "max": "99999999.99"
+          }
+        ],
+        "start_date": [
+          {
+            "kind": "date"
+          }
+        ]
+      },
+      "pii": {
+        "holder_name": {
+          "class": "person_name",
+          "mode": "clear"
+        },
+        "email": {
+          "class": "email",
+          "mode": "hmac"
+        },
+        "ssn": {
+          "class": "government_id",
+          "mode": "masked",
+          "mask_regex": "\\*{3}-\\*{2}-\\d{4}",
+          "keep_last": 4
+        }
+      },
+      "rejects": {
+        "table": "rejected_rows",
+        "key_col": "row_key",
+        "table_col": "table_name"
+      }
+    },
+    {
+      "source": "claims",
+      "target": "claims",
+      "pk": [
+        "claim_id"
+      ],
+      "derived": {
+        "claim_ref": {
+          "template": "CLM-{claim_id}"
+        }
+      },
+      "decimals": {
+        "amount": 2
+      },
+      "precision": {
+        "amount": [
+          10,
+          2
+        ]
+      },
+      "dates": [
+        "claim_date",
+        "updated_at"
+      ],
+      "updated_col": "updated_at",
+      "partition": "status",
+      "distinct": [
+        "status",
+        "policy_id"
+      ],
+      "group_by": "status",
+      "required": [
+        "claim_id",
+        "policy_id",
+        "amount"
+      ],
+      "filter": {
+        "exclude": {
+          "column": "status",
+          "in": [
+            "TEST"
+          ]
+        }
+      },
+      "rules": {
+        "amount": [
+          {
+            "kind": "range",
+            "min": "0"
+          }
+        ],
+        "claim_date": [
+          {
+            "kind": "date"
+          }
+        ]
+      },
+      "target_rules": {
+        "amount": [
+          {
+            "kind": "range",
+            "min": "0"
+          }
+        ],
+        "claim_date": [
+          {
+            "kind": "date"
+          }
+        ],
+        "status": [
+          {
+            "kind": "in_set",
+            "values": [
+              "OPEN",
+              "PAID",
+              "DENIED"
+            ]
+          }
+        ]
+      },
+      "fks": [
+        {
+          "col": "policy_id",
+          "ref_table": "policies",
+          "ref_col": "policy_id",
+          "sum_col": "amount"
+        }
+      ],
+      "rejects": {
+        "table": "rejected_rows",
+        "key_col": "row_key",
+        "table_col": "table_name"
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+<html><head><meta charset="utf-8"><style>
+ body{font-family:Helvetica,Arial,sans-serif;margin:40px;color:#222}
+ h1{margin-bottom:0} .badge{padding:6px 14px;border-radius:6px;color:#fff;font-weight:bold}
+ .PASS{background:#2e7d32}.FAIL{background:#c62828}
+ .REVIEW_REQUIRED{background:#ed6c02}.INCOMPLETE{background:#616161}
+ table{border-collapse:collapse;width:100%;margin:12px 0}
+ td,th{border:1px solid #ccc;padding:6px;font-size:12px;text-align:left;vertical-align:top}
+ .critical,.res-FAIL{color:#c62828;font-weight:bold}
+ .warning,.res-REVIEW{color:#ed6c02;font-weight:bold}
+ .res-PASS{color:#2e7d32;font-weight:bold}.res-NOT_TESTED{color:#616161;font-weight:bold}
+</style></head><body>
+<h1>Data Migration Audit Report</h1>
+<p>Audit ID: {{ r.audit_id }} &nbsp;|&nbsp; Run: {{ r.timestamp }} &nbsp;|&nbsp; Rendered: {{ date }}</p>
+<p><span class="badge {{ r.overall_status }}">{{ r.overall_status }}</span></p>
+<p><strong>Scope:</strong> {{ r.scope }}</p>
+
+<h2>Summary</h2>
+<p>Source rows: {{ r.stats.source_rows if r.stats.source_rows is not none else 'not verified' }}
+ | Target rows: {{ r.stats.target_rows if r.stats.target_rows is not none else 'not verified' }}
+ | Rows compared: {{ r.stats.rows_compared }}<br>
+ Columns proposed: {{ r.stats.columns_proposed }} | Needs review: {{ r.stats.columns_review }}
+ | Unmapped: {{ r.stats.columns_unmapped }}</p>
+<p><em>This report lists the checks performed and what was found. It is not a guarantee
+that all data is correct, and it is not approval for production use.</em></p>
+
+<h2>Column Mappings</h2>
+<table><tr><th>Source</th><th>Target</th><th>Confidence</th><th>Status</th><th>Reason</th></tr>
+{% for m in r.column_mappings %}
+<tr><td>{{ m.source }}</td><td>{{ m.target }}</td><td>{{ m.confidence }}</td><td>{{ m.status }}</td><td>{{ m.reason }}</td></tr>
+{% endfor %}</table>
+
+<h2>Findings</h2>
+{% if r.findings %}
+<table><tr><th>Result</th><th>Severity</th><th>Check</th><th>Column</th><th>Basis</th><th>Description</th><th>Evidence</th><th>Recommendation</th></tr>
+{% for f in r.findings %}
+<tr><td class="res-{{ f.result }}">{{ f.result }}</td><td class="{{ f.severity }}">{{ f.severity }}</td>
+<td>{{ f.check }}</td><td>{{ f.column }}</td><td>{{ f.basis }}</td>
+<td>{{ f.description }}</td><td>{{ f.evidence }}</td><td>{{ f.recommendation }}</td></tr>
+{% endfor %}</table>
+{% else %}<p>No findings.</p>{% endif %}
+
+<h2>Limitations</h2><ul>{% for l in r.limitations %}<li>{{ l }}</li>{% endfor %}</ul>
+</body></html>

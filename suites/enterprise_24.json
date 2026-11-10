@@ -1,0 +1,414 @@
+{
+  "name": "enterprise_24",
+  "version": "1.0",
+  "cases": {
+    "R01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "R02": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "K01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "K02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "K03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "K04": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "M01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "M02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "M03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "M04": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "F01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "F02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "F03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "Q01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "Q02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "Q03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "Q04": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "A01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "A02": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "A03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "H01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "H02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "H03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "T01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "T02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "T03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "T04": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "T05": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "P01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "P02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "N01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "N02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "N03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "N04": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "N05": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "B01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "B02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "B03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "B04": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "B05": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "D01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "D02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "D03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "D04": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "PII01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "PII02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "PR01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "PR02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "PR03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "PR04": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "S01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "S02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "S03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "S04": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "S05": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "S06": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "RI01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "RI02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "RI03": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "E01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "E02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "E03": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "E04": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "CDC01": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "CDC02": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "CDC03": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "CDC04": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "CDC05": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "SE01": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "SE02": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "SE03": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "FE01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "FE02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "FE03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "L01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "L02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "L03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "PF01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "PF02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "PF03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "PF04": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "RS01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "RS02": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "RS03": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "RS04": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "RS05": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "RS06": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "CP01": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "CP02": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "CP03": {
+      "enabled": true,
+      "mandatory": false
+    },
+    "CP04": {
+      "enabled": true,
+      "mandatory": true
+    },
+    "CP05": {
+      "enabled": true,
+      "mandatory": false
+    }
+  },
+  "categories": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": true,
+    "7": true,
+    "8": true,
+    "9": true,
+    "10": true,
+    "11": true,
+    "12": true,
+    "13": true,
+    "14": true,
+    "15": true,
+    "16": true,
+    "17": true,
+    "18": true,
+    "19": true,
+    "20": true,
+    "21": true,
+    "22": true,
+    "23": true,
+    "24": true
+  },
+  "custom": [
+    {
+      "id": "X-001",
+      "category": 5,
+      "title": "Example: no negative claim amounts",
+      "type": "sql_zero",
+      "side": "target",
+      "sql": "SELECT claim_id FROM claims WHERE CAST(amount AS REAL) < 0",
+      "mandatory": false
+    }
+  ],
+  "policy": {
+    "disabled_mandatory_blocks_approval": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "audit_id": "DEMO-001", "timestamp": "2026-11-09T12:00:00Z",
+  "overall_status": "FAIL",
+  "scope": "Table legacy.customers vs cloud.customers; profiles of all rows plus 50-row key-ordered samples.",
+  "stats": {"source_rows": 10, "target_rows": 9, "rows_compared": 9,
+            "columns_proposed": 6, "columns_review": 0, "columns_unmapped": 0},
+  "column_mappings": [
+    {"source":"id","target":"id","confidence":1.0,"status":"proposed","reason":"Identical name and type."},
+    {"source":"full_name","target":"full_name","confidence":1.0,"status":"proposed","reason":"Identical name and type."},
+    {"source":"email","target":"email","confidence":1.0,"status":"proposed","reason":"Identical name and type."},
+    {"source":"phone_number","target":"primary_contact_cell","confidence":0.92,"status":"proposed","reason":"Same value pattern and distinct count; only the name differs."},
+    {"source":"signup_date","target":"signup_date","confidence":0.9,"status":"proposed","reason":"Same name; type changed from date to text (DD/MM/YYYY)."},
+    {"source":"balance","target":"balance","confidence":1.0,"status":"proposed","reason":"Identical name and type."}
+  ],
+  "findings": [
+    {"check":"Row count","result":"FAIL","basis":"verified_metric","severity":"critical","column":"(table)","description":"Target has fewer rows than source.","evidence":"source_rows=10, target_rows=9","recommendation":"Identify the missing key (id=8) and re-migrate."},
+    {"check":"Truncation","result":"FAIL","basis":"sample_inference","severity":"critical","column":"email","description":"Value shorter in target for key 3.","evidence":"max_length source > target","recommendation":"Widen the target column and re-load row 3."},
+    {"check":"Numeric sum","result":"FAIL","basis":"verified_metric","severity":"critical","column":"balance","description":"Sums differ; key 5 differs in the sample.","evidence":"numeric_sum differs between profiles","recommendation":"Correct key 5 and re-run."},
+    {"check":"Date format","result":"PASS","basis":"sample_inference","severity":"info","column":"signup_date","description":"Differences explained by format normalization (YYYY-MM-DD to DD/MM/YYYY).","evidence":"All sampled rows match after normalization","recommendation":"Approve the mapping."},
+    {"check":"Referential integrity","result":"NOT_TESTED","basis":"verified_metric","severity":"info","column":"(table)","description":"No foreign key evidence supplied.","evidence":"none","recommendation":"Add FK checks to Box 1."}
+  ],
+  "limitations": ["Sample-based value checks cover at most 50 rows.", "Only one table was audited."]
+}

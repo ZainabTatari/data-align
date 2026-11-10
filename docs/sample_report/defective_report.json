@@ -1,0 +1,1782 @@
+{
+  "run_id": "run-a6d86a2ae8a1",
+  "tool_version": "0.9.0",
+  "normalization_version": "1.0",
+  "suite": {
+    "name": "enterprise_24",
+    "version": "1.0"
+  },
+  "as_of": "2025-01-01 00:00:00",
+  "config_sha256": "df54b90a1f57162e7c80191f49ace1728b6788e6d0e37fab773870d17c1ca75b",
+  "source_sha256": "00d2f79fccc6383bed8e2e4b3289f80a1644a8302c9efb3686b1a138d437265b",
+  "target_sha256": "730fcc62eac78bd1cb26c450a07937b6d43e3d035a184866c4da3c37e4fb4e63",
+  "overall": "FAIL",
+  "decision": "Do not approve: one or more checks failed.",
+  "interim": false,
+  "summary": {
+    "FAIL": 50,
+    "PASS": 36,
+    "REVIEW": 2,
+    "NOT_TESTED": 4
+  },
+  "categories": [
+    {
+      "number": 1,
+      "name": "Row Count Reconciliation",
+      "cases": 2,
+      "PASS": 0,
+      "FAIL": 2,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 2,
+      "name": "Primary Key and Record Integrity",
+      "cases": 4,
+      "PASS": 1,
+      "FAIL": 3,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 3,
+      "name": "AI Schema Mapping and Drift Detection",
+      "cases": 4,
+      "PASS": 2,
+      "FAIL": 1,
+      "REVIEW": 1,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 4,
+      "name": "Field-Level Data Comparison",
+      "cases": 3,
+      "PASS": 0,
+      "FAIL": 3,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 5,
+      "name": "Duplicate, Null and Data Quality",
+      "cases": 4,
+      "PASS": 0,
+      "FAIL": 4,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 6,
+      "name": "Aggregate Reconciliation",
+      "cases": 3,
+      "PASS": 0,
+      "FAIL": 3,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 7,
+      "name": "SHA-256 Hash Integrity",
+      "cases": 3,
+      "PASS": 1,
+      "FAIL": 2,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 8,
+      "name": "Timestamp and Data Freshness",
+      "cases": 5,
+      "PASS": 1,
+      "FAIL": 3,
+      "REVIEW": 0,
+      "NOT_TESTED": 1
+    },
+    {
+      "number": 9,
+      "name": "Positive Testing",
+      "cases": 2,
+      "PASS": 1,
+      "FAIL": 1,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 10,
+      "name": "Negative Testing",
+      "cases": 5,
+      "PASS": 4,
+      "FAIL": 1,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 11,
+      "name": "Boundary Value Testing",
+      "cases": 5,
+      "PASS": 0,
+      "FAIL": 5,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 12,
+      "name": "Numeric Precision and Decimal Conversion",
+      "cases": 4,
+      "PASS": 0,
+      "FAIL": 3,
+      "REVIEW": 0,
+      "NOT_TESTED": 1
+    },
+    {
+      "number": 13,
+      "name": "PII Discovery and Classification",
+      "cases": 2,
+      "PASS": 1,
+      "FAIL": 1,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 14,
+      "name": "Privacy-Preserving PII Reconciliation",
+      "cases": 4,
+      "PASS": 2,
+      "FAIL": 2,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 15,
+      "name": "Security and Access Control",
+      "cases": 6,
+      "PASS": 6,
+      "FAIL": 0,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 16,
+      "name": "Referential Integrity",
+      "cases": 3,
+      "PASS": 0,
+      "FAIL": 3,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 17,
+      "name": "ETL/ELT Transformation Validation",
+      "cases": 4,
+      "PASS": 2,
+      "FAIL": 2,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 18,
+      "name": "CDC and Incremental Migration",
+      "cases": 5,
+      "PASS": 0,
+      "FAIL": 5,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 19,
+      "name": "Schema Evolution and Regression",
+      "cases": 3,
+      "PASS": 0,
+      "FAIL": 3,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 20,
+      "name": "Data Format and Encoding",
+      "cases": 3,
+      "PASS": 1,
+      "FAIL": 2,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 21,
+      "name": "Data Lineage and Traceability",
+      "cases": 3,
+      "PASS": 2,
+      "FAIL": 0,
+      "REVIEW": 1,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 22,
+      "name": "Performance and Scalability",
+      "cases": 4,
+      "PASS": 3,
+      "FAIL": 0,
+      "REVIEW": 0,
+      "NOT_TESTED": 1
+    },
+    {
+      "number": 23,
+      "name": "Resilience and Recovery",
+      "cases": 6,
+      "PASS": 6,
+      "FAIL": 0,
+      "REVIEW": 0,
+      "NOT_TESTED": 0
+    },
+    {
+      "number": 24,
+      "name": "Privacy and Compliance Evidence",
+      "cases": 5,
+      "PASS": 3,
+      "FAIL": 1,
+      "REVIEW": 0,
+      "NOT_TESTED": 1
+    }
+  ],
+  "findings": [
+    {
+      "id": "R01",
+      "category": 1,
+      "category_name": "Row Count Reconciliation",
+      "title": "Row count: target equals expected (source minus declared filters/rejects)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Row count mismatch (2)",
+      "evidence": {
+        "tables": {
+          "policies": {
+            "source": 203,
+            "filtered": 0,
+            "rejected": 3,
+            "expected": 200,
+            "target": 201
+          },
+          "claims": {
+            "source": 604,
+            "filtered": 5,
+            "rejected": 2,
+            "expected": 597,
+            "target": 598
+          }
+        },
+        "problem_count": 2,
+        "samples": [
+          "('policies', 'expected 200, target 201')",
+          "('claims', 'expected 597, target 598')"
+        ]
+      },
+      "duration_ms": 3.3
+    },
+    {
+      "id": "R02",
+      "category": 1,
+      "category_name": "Row Count Reconciliation",
+      "title": "Row count by partition",
+      "status": "FAIL",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Partition count mismatch (2)",
+      "evidence": {
+        "problem_count": 2,
+        "samples": [
+          "('policies', 'partition ACTIVE: expected 92, got 93')",
+          "('claims', 'partition OPEN: expected 197, got 198')"
+        ]
+      },
+      "duration_ms": 0.26
+    },
+    {
+      "id": "K01",
+      "category": 2,
+      "category_name": "Primary Key and Record Integrity",
+      "title": "Primary key uniqueness in target",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Duplicate primary keys in target (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('policies', 'duplicate key 53')"
+        ]
+      },
+      "duration_ms": 0.01
+    },
+    {
+      "id": "K02",
+      "category": 2,
+      "category_name": "Primary Key and Record Integrity",
+      "title": "Missing records (expected in target but absent)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Records missing from target (2)",
+      "evidence": {
+        "problem_count": 2,
+        "samples": [
+          "('policies', 'missing key 50')",
+          "('policies', 'missing key 51')"
+        ]
+      },
+      "duration_ms": 0.05
+    },
+    {
+      "id": "K03",
+      "category": 2,
+      "category_name": "Primary Key and Record Integrity",
+      "title": "Extra records in target",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Unexpected records in target (3)",
+      "evidence": {
+        "problem_count": 3,
+        "samples": [
+          "('policies', 'unexpected key 7')",
+          "('policies', 'unexpected key 9999')",
+          "('claims', 'unexpected key 590')"
+        ]
+      },
+      "duration_ms": 0.04
+    },
+    {
+      "id": "K04",
+      "category": 2,
+      "category_name": "Primary Key and Record Integrity",
+      "title": "Null or empty keys",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "No null or empty keys",
+      "evidence": {},
+      "duration_ms": 0.36
+    },
+    {
+      "id": "M01",
+      "category": 3,
+      "category_name": "AI Schema Mapping and Drift Detection",
+      "title": "Every source column is mapped or explicitly ignored",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "All source columns accounted for",
+      "evidence": {
+        "ai_suggestions": {
+          "policies": [
+            {
+              "source": "holder_name",
+              "target": "customer_name",
+              "confidence": 0.85,
+              "evidence": "synonym group",
+              "requires_approval": true
+            }
+          ],
+          "claims": []
+        }
+      },
+      "duration_ms": 0.11
+    },
+    {
+      "id": "M02",
+      "category": 3,
+      "category_name": "AI Schema Mapping and Drift Detection",
+      "title": "Mapping approved by a human (suggestions are never self-approving)",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Mapping v1.0 approved by qa.lead",
+      "evidence": {},
+      "duration_ms": 0.01
+    },
+    {
+      "id": "M03",
+      "category": 3,
+      "category_name": "AI Schema Mapping and Drift Detection",
+      "title": "Data type / length / nullability drift on mapped columns",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Type/length drift (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('claims', 'amount: text -> float')"
+        ]
+      },
+      "duration_ms": 0.15
+    },
+    {
+      "id": "M04",
+      "category": 3,
+      "category_name": "AI Schema Mapping and Drift Detection",
+      "title": "New or unexpected target columns",
+      "status": "REVIEW",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Unexpected target columns (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('policies', 'new target column legacy_flag')"
+        ]
+      },
+      "duration_ms": 0.01
+    },
+    {
+      "id": "F01",
+      "category": 4,
+      "category_name": "Field-Level Data Comparison",
+      "title": "Field-by-field value comparison (non-transformed columns)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Field value mismatches (22)",
+      "evidence": {
+        "problem_count": 22,
+        "samples": [
+          "('policies', 'key 60 column holder_name')",
+          "('policies', 'key 61 column email')",
+          "('policies', 'key 62 column email')",
+          "('policies', 'key 63 column premium')",
+          "('policies', 'key 65 column holder_name')"
+        ]
+      },
+      "duration_ms": 2.71
+    },
+    {
+      "id": "F02",
+      "category": 4,
+      "category_name": "Field-Level Data Comparison",
+      "title": "Values replaced by NULL/empty in target",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Values lost to NULL/empty (2)",
+      "evidence": {
+        "problem_count": 2,
+        "samples": [
+          "('claims', 'key 7 column description')",
+          "('claims', 'key 8 column amount')"
+        ]
+      },
+      "duration_ms": 1.05
+    },
+    {
+      "id": "F03",
+      "category": 4,
+      "category_name": "Field-Level Data Comparison",
+      "title": "Whitespace, case and truncation differences",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Text damage detected (4)",
+      "evidence": {
+        "problem_count": 4,
+        "samples": [
+          "('policies', 'key 60 column holder_name: whitespace')",
+          "('policies', 'key 61 column email: case')",
+          "('policies', 'key 63 column premium: truncation')",
+          "('claims', 'key 4 column description: truncation')"
+        ]
+      },
+      "duration_ms": 1.02
+    },
+    {
+      "id": "Q01",
+      "category": 5,
+      "category_name": "Duplicate, Null and Data Quality",
+      "title": "Duplicate business keys not present in source",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "New duplicate business keys (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('policies', 'business key duplicated in target x2')"
+        ]
+      },
+      "duration_ms": 0.15
+    },
+    {
+      "id": "Q02",
+      "category": 5,
+      "category_name": "Duplicate, Null and Data Quality",
+      "title": "Required columns are populated in target",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Required fields empty (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('claims', 'key 8 column amount empty')"
+        ]
+      },
+      "duration_ms": 0.37
+    },
+    {
+      "id": "Q03",
+      "category": 5,
+      "category_name": "Duplicate, Null and Data Quality",
+      "title": "NULL vs empty string semantics preserved",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "NULL/empty confusion (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('claims', 'key 5 column description')"
+        ]
+      },
+      "duration_ms": 0.86
+    },
+    {
+      "id": "Q04",
+      "category": 5,
+      "category_name": "Duplicate, Null and Data Quality",
+      "title": "Configured data-quality rules hold in target",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Data-quality rule violations (3)",
+      "evidence": {
+        "problem_count": 3,
+        "samples": [
+          "('policies', 'key 67 column start_date violates date')",
+          "('policies', 'key 7 column email violates regex')",
+          "('claims', 'key 20 column amount violates range')"
+        ]
+      },
+      "duration_ms": 5.08
+    },
+    {
+      "id": "A01",
+      "category": 6,
+      "category_name": "Aggregate Reconciliation",
+      "title": "COUNT/SUM/MIN/MAX/AVG on numeric columns (exact decimal)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Aggregate mismatches (7)",
+      "evidence": {
+        "problem_count": 7,
+        "samples": [
+          "('policies', 'premium count: expected 200, got 201')",
+          "('policies', 'premium sum: expected 10952104.05, got 10956652.86')",
+          "('policies', 'premium avg: expected 54760.52025, got 54510.71074626865671641791045')",
+          "('claims', 'amount sum: expected 17224386.82, got 107223888.06000000000000004')",
+          "('claims', 'amount min: expected 0.00, got -50.0')"
+        ]
+      },
+      "duration_ms": 1.86
+    },
+    {
+      "id": "A02",
+      "category": 6,
+      "category_name": "Aggregate Reconciliation",
+      "title": "COUNT DISTINCT",
+      "status": "FAIL",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Distinct count mismatch (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('claims', 'policy_id: expected 195 distinct, got 196')"
+        ]
+      },
+      "duration_ms": 0.35
+    },
+    {
+      "id": "A03",
+      "category": 6,
+      "category_name": "Aggregate Reconciliation",
+      "title": "Group totals (financial control totals)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Group total mismatch (3)",
+      "evidence": {
+        "problem_count": 3,
+        "samples": [
+          "('claims', 'amount by status=OPEN: expected 12338810.06, got 102338489.07')",
+          "('claims', 'amount by status=PAID: expected 2187366.02, got 2187288.25')",
+          "('claims', 'amount by status=DENIED: expected 2698210.74, got 2698110.74000000000000004')"
+        ]
+      },
+      "duration_ms": 1.31
+    },
+    {
+      "id": "H01",
+      "category": 7,
+      "category_name": "SHA-256 Hash Integrity",
+      "title": "Row-level SHA-256 hash comparison (100% coverage incl. missing/extra rows)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Row hash mismatches (27)",
+      "evidence": {
+        "coverage": {
+          "policies": {
+            "hashed_source": 200,
+            "hashed_target": 200
+          },
+          "claims": {
+            "hashed_source": 597,
+            "hashed_target": 598
+          }
+        },
+        "normalization": "1.0",
+        "problem_count": 27,
+        "samples": [
+          "('policies', 'key 50')",
+          "('policies', 'key 51')",
+          "('policies', 'key 60')",
+          "('policies', 'key 61')",
+          "('policies', 'key 62')"
+        ]
+      },
+      "duration_ms": 14.01
+    },
+    {
+      "id": "H02",
+      "category": 7,
+      "category_name": "SHA-256 Hash Integrity",
+      "title": "Partition/batch hash (order-independent)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Batch hash mismatch (2)",
+      "evidence": {
+        "problem_count": 2,
+        "samples": [
+          "('policies', 'batch hash differs')",
+          "('claims', 'batch hash differs')"
+        ]
+      },
+      "duration_ms": 13.43
+    },
+    {
+      "id": "H03",
+      "category": 7,
+      "category_name": "SHA-256 Hash Integrity",
+      "title": "Canonical hashing self-test (known-answer, order and type invariance)",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Canonical form behaves as documented",
+      "evidence": {},
+      "duration_ms": 0.08
+    },
+    {
+      "id": "T01",
+      "category": 8,
+      "category_name": "Timestamp and Data Freshness",
+      "title": "Valid dates/timestamps in target",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Invalid dates in target (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('policies', 'key 67 column start_date')"
+        ]
+      },
+      "duration_ms": 8.19
+    },
+    {
+      "id": "T02",
+      "category": 8,
+      "category_name": "Timestamp and Data Freshness",
+      "title": "No future-dated business records",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Future-dated records (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('claims', 'key 22 column claim_date')"
+        ]
+      },
+      "duration_ms": 8.19
+    },
+    {
+      "id": "T03",
+      "category": 8,
+      "category_name": "Timestamp and Data Freshness",
+      "title": "Freshness: target reflects latest source modification",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Target is stale or ahead (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('claims', 'latest source updated_at != latest target updated_at')"
+        ]
+      },
+      "duration_ms": 0.48
+    },
+    {
+      "id": "T04",
+      "category": 8,
+      "category_name": "Timestamp and Data Freshness",
+      "title": "Migration latency within limit",
+      "status": "NOT_TESTED",
+      "mandatory": false,
+      "disabled": false,
+      "message": "No loaded_col/max_latency_s configured",
+      "evidence": {},
+      "duration_ms": 0.01
+    },
+    {
+      "id": "T05",
+      "category": 8,
+      "category_name": "Timestamp and Data Freshness",
+      "title": "Timestamps are UTC / carry no unexpected offset",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "No non-UTC offsets",
+      "evidence": {},
+      "duration_ms": 0.13
+    },
+    {
+      "id": "P01",
+      "category": 9,
+      "category_name": "Positive Testing",
+      "title": "Valid source records are accepted and migrated intact",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Valid records lost or altered (24)",
+      "evidence": {
+        "problem_count": 24,
+        "samples": [
+          "('policies', 'valid key 50 not migrated')",
+          "('policies', 'valid key 51 not migrated')",
+          "('policies', 'valid key 60 altered')",
+          "('policies', 'valid key 61 altered')",
+          "('policies', 'valid key 62 altered')"
+        ]
+      },
+      "duration_ms": 9.3
+    },
+    {
+      "id": "P02",
+      "category": 9,
+      "category_name": "Positive Testing",
+      "title": "Rule-derived valid scenarios are accepted by the rule engine",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "13 generated valid scenarios accepted",
+      "evidence": {},
+      "duration_ms": 0.08
+    },
+    {
+      "id": "N01",
+      "category": 10,
+      "category_name": "Negative Testing",
+      "title": "Invalid source records are rejected/quarantined, not silently loaded or dropped",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Invalid-record handling failures (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('policies', 'invalid key 7 was loaded')"
+        ]
+      },
+      "duration_ms": 5.32
+    },
+    {
+      "id": "N02",
+      "category": 10,
+      "category_name": "Negative Testing",
+      "title": "Records with broken relationships are not loaded",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Broken relationships handled",
+      "evidence": {},
+      "duration_ms": 0.09
+    },
+    {
+      "id": "N03",
+      "category": 10,
+      "category_name": "Negative Testing",
+      "title": "Junk numeric/date input is handled safely (no crash, no false acceptance)",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Junk input handled safely",
+      "evidence": {},
+      "duration_ms": 0.03
+    },
+    {
+      "id": "N04",
+      "category": 10,
+      "category_name": "Negative Testing",
+      "title": "Malicious identifiers and SQL are rejected",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Unsafe identifiers/SQL rejected, valid SELECT accepted",
+      "evidence": {},
+      "duration_ms": 0.05
+    },
+    {
+      "id": "N05",
+      "category": 10,
+      "category_name": "Negative Testing",
+      "title": "Rule-derived invalid scenarios are rejected by the rule engine",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "13 generated invalid scenarios rejected",
+      "evidence": {},
+      "duration_ms": 0.08
+    },
+    {
+      "id": "B01",
+      "category": 11,
+      "category_name": "Boundary Value Testing",
+      "title": "Numeric extremes (min, max, zero) preserved",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Boundary values altered (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('claims', 'key 2 column amount boundary value altered')"
+        ]
+      },
+      "duration_ms": 2.22
+    },
+    {
+      "id": "B02",
+      "category": 11,
+      "category_name": "Boundary Value Testing",
+      "title": "Longest strings preserved (no truncation at length limits)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Long values altered (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('claims', 'key 4 column description longest value altered')"
+        ]
+      },
+      "duration_ms": 1.38
+    },
+    {
+      "id": "B03",
+      "category": 11,
+      "category_name": "Boundary Value Testing",
+      "title": "Empty inputs handled; empty strings preserved",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Empty-input handling failures (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('claims', 'key 5 column description empty string changed')"
+        ]
+      },
+      "duration_ms": 0.82
+    },
+    {
+      "id": "B04",
+      "category": 11,
+      "category_name": "Boundary Value Testing",
+      "title": "Date boundaries preserved (leap days, year edges, min/max)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Boundary dates altered (2)",
+      "evidence": {
+        "problem_count": 2,
+        "samples": [
+          "('claims', 'key 3 column claim_date boundary date altered')",
+          "('claims', 'key 15 column updated_at boundary date altered')"
+        ]
+      },
+      "duration_ms": 0.51
+    },
+    {
+      "id": "B05",
+      "category": 11,
+      "category_name": "Boundary Value Testing",
+      "title": "Precision overflow/underflow against declared DECIMAL(p,s)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Precision overflow/underflow (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('claims', 'key 2 amount overflow')"
+        ]
+      },
+      "duration_ms": 1.04
+    },
+    {
+      "id": "D01",
+      "category": 12,
+      "category_name": "Numeric Precision and Decimal Conversion",
+      "title": "Exact decimal equality (no float drift)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Decimal values differ (6)",
+      "evidence": {
+        "problem_count": 6,
+        "samples": [
+          "('policies', 'key 63 column premium')",
+          "('claims', 'key 15 column amount')",
+          "('claims', 'key 2 column amount')",
+          "('claims', 'key 20 column amount')",
+          "('claims', 'key 21 column amount')"
+        ]
+      },
+      "duration_ms": 1.89
+    },
+    {
+      "id": "D02",
+      "category": 12,
+      "category_name": "Numeric Precision and Decimal Conversion",
+      "title": "Scale, rounding and truncation",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Scale/rounding defects (5)",
+      "evidence": {
+        "problem_count": 5,
+        "samples": [
+          "('policies', 'key 63 premium: other')",
+          "('claims', 'key 15 amount: other')",
+          "('claims', 'key 2 amount: other')",
+          "('claims', 'key 20 amount: other')",
+          "('claims', 'key 21 amount: excess scale 17>2')"
+        ]
+      },
+      "duration_ms": 2.35
+    },
+    {
+      "id": "D03",
+      "category": 12,
+      "category_name": "Numeric Precision and Decimal Conversion",
+      "title": "Numeric text formatting compliance (no scientific notation, grouping or locale commas)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Non-canonical numeric formatting (2)",
+      "evidence": {
+        "problem_count": 2,
+        "samples": [
+          "('policies', 'key 63 column premium: non-canonical format')",
+          "('policies', 'key 64 column premium: non-canonical format')"
+        ]
+      },
+      "duration_ms": 0.15
+    },
+    {
+      "id": "D04",
+      "category": 12,
+      "category_name": "Numeric Precision and Decimal Conversion",
+      "title": "Unit / currency / percentage conversion factors applied exactly",
+      "status": "NOT_TESTED",
+      "mandatory": false,
+      "disabled": false,
+      "message": "No conversion factors configured",
+      "evidence": {},
+      "duration_ms": 0.01
+    },
+    {
+      "id": "PII01",
+      "category": 13,
+      "category_name": "PII Discovery and Classification",
+      "title": "Schema-based PII discovery (every PII-looking column is declared)",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "All PII-looking columns are declared",
+      "evidence": {
+        "classification": [
+          {
+            "table": "policies",
+            "column": "holder_name",
+            "class": "person_name",
+            "confidence": 0.7,
+            "basis": "column name"
+          },
+          {
+            "table": "policies",
+            "column": "email",
+            "class": "email",
+            "confidence": 0.7,
+            "basis": "column name"
+          },
+          {
+            "table": "policies",
+            "column": "ssn",
+            "class": "government_id",
+            "confidence": 0.7,
+            "basis": "column name"
+          },
+          {
+            "table": "policies",
+            "column": "customer_name",
+            "class": "person_name",
+            "confidence": 0.7,
+            "basis": "column name"
+          },
+          {
+            "table": "policies",
+            "column": "email",
+            "class": "email",
+            "confidence": 0.7,
+            "basis": "column name"
+          },
+          {
+            "table": "policies",
+            "column": "ssn",
+            "class": "government_id",
+            "confidence": 0.7,
+            "basis": "column name"
+          }
+        ]
+      },
+      "duration_ms": 0.2
+    },
+    {
+      "id": "PII02",
+      "category": 13,
+      "category_name": "PII Discovery and Classification",
+      "title": "Content-based PII/secret discovery in target text columns",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Secrets/credentials found in target data (1)",
+      "evidence": {
+        "other_pii_hits": 2,
+        "problem_count": 1,
+        "samples": [
+          "('policies', 'key 71 column notes: secret_assignment')"
+        ]
+      },
+      "duration_ms": 8.76
+    },
+    {
+      "id": "PR01",
+      "category": 14,
+      "category_name": "Privacy-Preserving PII Reconciliation",
+      "title": "HMAC-SHA-256 PII reconciliation (compare tokens, not raw values)",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "PII token mismatches (3)",
+      "evidence": {
+        "problem_count": 3,
+        "samples": [
+          "('policies', 'key 66 column holder_name: token mismatch')",
+          "('policies', 'key 61 column email: token mismatch')",
+          "('policies', 'key 62 column email: token mismatch')"
+        ]
+      },
+      "duration_ms": 1.69
+    },
+    {
+      "id": "PR02",
+      "category": 14,
+      "category_name": "Privacy-Preserving PII Reconciliation",
+      "title": "HMAC key management (strength, sourced from environment, not stored)",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Key is strong and sourced from the environment",
+      "evidence": {},
+      "duration_ms": 0.08
+    },
+    {
+      "id": "PR03",
+      "category": 14,
+      "category_name": "Privacy-Preserving PII Reconciliation",
+      "title": "Masked columns are masked in target and never equal the raw value",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Masking failures (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('policies', 'key 73 column ssn: not correctly masked')"
+        ]
+      },
+      "duration_ms": 0.14
+    },
+    {
+      "id": "PR04",
+      "category": 14,
+      "category_name": "Privacy-Preserving PII Reconciliation",
+      "title": "Data minimisation: AI prompt contains no PII",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "AI prompt is PII-free",
+      "evidence": {},
+      "duration_ms": 3.43
+    },
+    {
+      "id": "S01",
+      "category": 15,
+      "category_name": "Security and Access Control",
+      "title": "Source and target connections are read-only",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Both connections reject writes",
+      "evidence": {},
+      "duration_ms": 0.1
+    },
+    {
+      "id": "S02",
+      "category": 15,
+      "category_name": "Security and Access Control",
+      "title": "Reports/evidence contain no raw PII or secrets",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "No PII or secrets in report output",
+      "evidence": {},
+      "duration_ms": 14.01
+    },
+    {
+      "id": "S03",
+      "category": 15,
+      "category_name": "Security and Access Control",
+      "title": "No secrets stored in configuration",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Configuration holds no secrets",
+      "evidence": {},
+      "duration_ms": 0.26
+    },
+    {
+      "id": "S04",
+      "category": 15,
+      "category_name": "Security and Access Control",
+      "title": "Audit log written and retention declared",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Audit log present; retention 365 days declared",
+      "evidence": {},
+      "duration_ms": 0.01
+    },
+    {
+      "id": "S05",
+      "category": 15,
+      "category_name": "Security and Access Control",
+      "title": "Encryption configuration evidence declared (declared, not verified)",
+      "status": "PASS",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Evidence references declared (document references only; encryption itself not verified by this tool)",
+      "evidence": {},
+      "duration_ms": 0.0
+    },
+    {
+      "id": "S06",
+      "category": 15,
+      "category_name": "Security and Access Control",
+      "title": "Errors are sanitised (no paths or stack traces)",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Error text is sanitised",
+      "evidence": {},
+      "duration_ms": 0.05
+    },
+    {
+      "id": "RI01",
+      "category": 16,
+      "category_name": "Referential Integrity",
+      "title": "No orphaned child records in target",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Orphaned records in target (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('claims', '7 orphaned rows on policy_id')"
+        ]
+      },
+      "duration_ms": 0.29
+    },
+    {
+      "id": "RI02",
+      "category": 16,
+      "category_name": "Referential Integrity",
+      "title": "Parent-child cardinality preserved",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Cardinality changed (3)",
+      "evidence": {
+        "problem_count": 3,
+        "samples": [
+          "('claims', 'parent 88888: child count 0 -> 1')",
+          "('claims', 'parent 41: child count 5 -> 6')",
+          "('claims', 'parent 5: child count 2 -> 1')"
+        ]
+      },
+      "duration_ms": 0.37
+    },
+    {
+      "id": "RI03",
+      "category": 16,
+      "category_name": "Referential Integrity",
+      "title": "Cross-table consistency: child totals per parent preserved",
+      "status": "FAIL",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Parent totals differ (7)",
+      "evidence": {
+        "problem_count": 7,
+        "samples": [
+          "('claims', 'parent 182: total differs')",
+          "('claims', 'parent 88888: total differs')",
+          "('claims', 'parent 45: total differs')",
+          "('claims', 'parent 160: total differs')",
+          "('claims', 'parent 5: total differs')"
+        ]
+      },
+      "duration_ms": 1.67
+    },
+    {
+      "id": "E01",
+      "category": 17,
+      "category_name": "ETL/ELT Transformation Validation",
+      "title": "Mapping/lookup/cleansing transformations applied correctly",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Transformation errors (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('policies', 'key 68 column status')"
+        ]
+      },
+      "duration_ms": 0.35
+    },
+    {
+      "id": "E02",
+      "category": 17,
+      "category_name": "ETL/ELT Transformation Validation",
+      "title": "Filters: excluded rows are absent from target",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Filter honoured",
+      "evidence": {},
+      "duration_ms": 0.02
+    },
+    {
+      "id": "E03",
+      "category": 17,
+      "category_name": "ETL/ELT Transformation Validation",
+      "title": "Derived columns computed correctly",
+      "status": "PASS",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Derived columns correct",
+      "evidence": {},
+      "duration_ms": 0.59
+    },
+    {
+      "id": "E04",
+      "category": 17,
+      "category_name": "ETL/ELT Transformation Validation",
+      "title": "Every source row is exactly one of: migrated, filtered, rejected",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Unaccounted or double-counted rows (3)",
+      "evidence": {
+        "problem_count": 3,
+        "samples": [
+          "('policies', 'key 7 both loaded and rejected')",
+          "('policies', 'key 50 unaccounted for')",
+          "('policies', 'key 51 unaccounted for')"
+        ]
+      },
+      "duration_ms": 0.16
+    },
+    {
+      "id": "CDC01",
+      "category": 18,
+      "category_name": "CDC and Incremental Migration",
+      "title": "Inserts/updates: latest change is reflected in target",
+      "status": "FAIL",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Changes missing or stale in target (2)",
+      "evidence": {
+        "problem_count": 2,
+        "samples": [
+          "('cdc', 'key 15: change not reflected')",
+          "('cdc', 'key 590: last event I but absent in source')"
+        ]
+      },
+      "duration_ms": 0.22
+    },
+    {
+      "id": "CDC02",
+      "category": 18,
+      "category_name": "CDC and Incremental Migration",
+      "title": "Deletes: deleted keys absent from target",
+      "status": "FAIL",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Deleted records still present (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('cdc', 'key 590: deleted in source but still in target')"
+        ]
+      },
+      "duration_ms": 0.09
+    },
+    {
+      "id": "CDC03",
+      "category": 18,
+      "category_name": "CDC and Incremental Migration",
+      "title": "Event order and duplicate events",
+      "status": "FAIL",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Event stream anomalies (2)",
+      "evidence": {
+        "problem_count": 2,
+        "samples": [
+          "('cdc', 'duplicate event id E000007')",
+          "('cdc', 'key 590: events out of order (seq 16->19)')"
+        ]
+      },
+      "duration_ms": 0.1
+    },
+    {
+      "id": "CDC04",
+      "category": 18,
+      "category_name": "CDC and Incremental Migration",
+      "title": "Watermark progression: target watermark equals last applied source event",
+      "status": "FAIL",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Watermark lag or drift (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('watermark', 'target watermark 15 != source max seq 19')"
+        ]
+      },
+      "duration_ms": 0.1
+    },
+    {
+      "id": "CDC05",
+      "category": 18,
+      "category_name": "CDC and Incremental Migration",
+      "title": "Idempotency: replaying / de-duplicating the stream yields the same state",
+      "status": "FAIL",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Non-idempotent event stream (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('cdc', 'duplicate delivery changes final state (1 keys)')"
+        ]
+      },
+      "duration_ms": 0.08
+    },
+    {
+      "id": "SE01",
+      "category": 19,
+      "category_name": "Schema Evolution and Regression",
+      "title": "Target columns match the approved baseline schema",
+      "status": "FAIL",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Schema drift from baseline (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('policies', 'new column legacy_flag')"
+        ]
+      },
+      "duration_ms": 0.02
+    },
+    {
+      "id": "SE02",
+      "category": 19,
+      "category_name": "Schema Evolution and Regression",
+      "title": "Backward compatibility: column type classes unchanged from baseline",
+      "status": "FAIL",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Incompatible type changes (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('claims', 'amount: text -> float')"
+        ]
+      },
+      "duration_ms": 0.1
+    },
+    {
+      "id": "SE03",
+      "category": 19,
+      "category_name": "Schema Evolution and Regression",
+      "title": "Regression vs previous run (previously passing cases must not now fail)",
+      "status": "FAIL",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Regressions since previous run (46)",
+      "evidence": {
+        "problem_count": 46,
+        "samples": [
+          "('regression', 'A01: PASS -> FAIL')",
+          "('regression', 'A02: PASS -> FAIL')",
+          "('regression', 'A03: PASS -> FAIL')",
+          "('regression', 'B01: PASS -> FAIL')",
+          "('regression', 'B02: PASS -> FAIL')"
+        ]
+      },
+      "duration_ms": 0.26
+    },
+    {
+      "id": "FE01",
+      "category": 20,
+      "category_name": "Data Format and Encoding",
+      "title": "Unicode normalisation and mojibake",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Encoding damage (2)",
+      "evidence": {
+        "problem_count": 2,
+        "samples": [
+          "('policies', 'key 65 column holder_name: not NFC')",
+          "('policies', 'key 66 column holder_name: mojibake')"
+        ]
+      },
+      "duration_ms": 1.04
+    },
+    {
+      "id": "FE02",
+      "category": 20,
+      "category_name": "Data Format and Encoding",
+      "title": "Special characters, quotes, newlines and line endings preserved",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Special-character values altered (2)",
+      "evidence": {
+        "problem_count": 2,
+        "samples": [
+          "('policies', 'key 65 column holder_name')",
+          "('policies', 'key 66 column holder_name')"
+        ]
+      },
+      "duration_ms": 1.8
+    },
+    {
+      "id": "FE03",
+      "category": 20,
+      "category_name": "Data Format and Encoding",
+      "title": "CSV/JSON round-trip and malformed-JSON detection",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Round-trips lossless",
+      "evidence": {},
+      "duration_ms": 4.2
+    },
+    {
+      "id": "L01",
+      "category": 21,
+      "category_name": "Data Lineage and Traceability",
+      "title": "Lineage record complete (batch, versions, snapshot, audit id)",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Lineage metadata complete",
+      "evidence": {
+        "audit_id": "run-a6d86a2ae8a1"
+      },
+      "duration_ms": 0.01
+    },
+    {
+      "id": "L02",
+      "category": 21,
+      "category_name": "Data Lineage and Traceability",
+      "title": "Every target column is traceable (mapped, derived or declared)",
+      "status": "REVIEW",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Untraceable target columns (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('policies', 'untraceable target column legacy_flag')"
+        ]
+      },
+      "duration_ms": 0.01
+    },
+    {
+      "id": "L03",
+      "category": 21,
+      "category_name": "Data Lineage and Traceability",
+      "title": "Audit trail covers every executed case",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Every case is in the audit log",
+      "evidence": {},
+      "duration_ms": 0.17
+    },
+    {
+      "id": "PF01",
+      "category": 22,
+      "category_name": "Performance and Scalability",
+      "title": "Per-case execution time within budget",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "All cases within budget",
+      "evidence": {
+        "slowest_ms": [
+          [
+            14.01,
+            "S02"
+          ],
+          [
+            14.01,
+            "H01"
+          ],
+          [
+            13.43,
+            "H02"
+          ]
+        ]
+      },
+      "duration_ms": 0.03
+    },
+    {
+      "id": "PF02",
+      "category": 22,
+      "category_name": "Performance and Scalability",
+      "title": "Measured hashing throughput (rows/second)",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "113,692 rows/s over 807 rows (measured, single process)",
+      "evidence": {
+        "rows": 807,
+        "seconds": 0.0071,
+        "rows_per_s": 113692,
+        "cpu_seconds": 0.0071
+      },
+      "duration_ms": 7.12
+    },
+    {
+      "id": "PF03",
+      "category": 22,
+      "category_name": "Performance and Scalability",
+      "title": "Peak memory within limit",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Peak RSS 26 MB (measured)",
+      "evidence": {
+        "peak_mb": 26
+      },
+      "duration_ms": 0.02
+    },
+    {
+      "id": "PF04",
+      "category": 22,
+      "category_name": "Performance and Scalability",
+      "title": "Concurrency, partition parallelism and cloud query cost",
+      "status": "NOT_TESTED",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Not measurable with local SQLite files; requires a cloud-warehouse connector (not implemented in 0.9.0)",
+      "evidence": {},
+      "duration_ms": 0.0
+    },
+    {
+      "id": "RS01",
+      "category": 23,
+      "category_name": "Resilience and Recovery",
+      "title": "Checkpoint/resume: an interrupted run resumes without redoing finished cases",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Resume skipped finished work and completed the rest",
+      "evidence": {},
+      "duration_ms": 0.8
+    },
+    {
+      "id": "RS02",
+      "category": 23,
+      "category_name": "Resilience and Recovery",
+      "title": "Unavailable target fails loudly (never silently creates an empty database)",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Missing database raised an error",
+      "evidence": {},
+      "duration_ms": 0.04
+    },
+    {
+      "id": "RS03",
+      "category": 23,
+      "category_name": "Resilience and Recovery",
+      "title": "Corrupted input fails cleanly",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Corrupt file rejected: DatabaseError: file is not a database",
+      "evidence": {},
+      "duration_ms": 0.2
+    },
+    {
+      "id": "RS04",
+      "category": 23,
+      "category_name": "Resilience and Recovery",
+      "title": "Query timeouts are enforced",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Runaway query interrupted after 0.05s",
+      "evidence": {},
+      "duration_ms": 50.12
+    },
+    {
+      "id": "RS05",
+      "category": 23,
+      "category_name": "Resilience and Recovery",
+      "title": "Interrupted report writes never corrupt the previous report",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Atomic writes verified",
+      "evidence": {},
+      "duration_ms": 0.29
+    },
+    {
+      "id": "RS06",
+      "category": 23,
+      "category_name": "Resilience and Recovery",
+      "title": "Idempotency: re-running a check gives identical results",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Two runs identical",
+      "evidence": {},
+      "duration_ms": 27.43
+    },
+    {
+      "id": "CP01",
+      "category": 24,
+      "category_name": "Privacy and Compliance Evidence",
+      "title": "Run evidence package is complete and tamper-evident",
+      "status": "PASS",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Evidence fields present",
+      "evidence": {},
+      "duration_ms": 0.42
+    },
+    {
+      "id": "CP02",
+      "category": 24,
+      "category_name": "Privacy and Compliance Evidence",
+      "title": "GDPR technical evidence references",
+      "status": "PASS",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Evidence references present (technical evidence only; not a legal determination of compliance)",
+      "evidence": {},
+      "duration_ms": 0.01
+    },
+    {
+      "id": "CP03",
+      "category": 24,
+      "category_name": "Privacy and Compliance Evidence",
+      "title": "HIPAA technical evidence references",
+      "status": "NOT_TESTED",
+      "mandatory": false,
+      "disabled": false,
+      "message": "No health-data columns and HIPAA not configured",
+      "evidence": {},
+      "duration_ms": 0.2
+    },
+    {
+      "id": "CP04",
+      "category": 24,
+      "category_name": "Privacy and Compliance Evidence",
+      "title": "PCI DSS: no clear-text card numbers in target",
+      "status": "FAIL",
+      "mandatory": true,
+      "disabled": false,
+      "message": "Clear-text card numbers in target (1)",
+      "evidence": {
+        "problem_count": 1,
+        "samples": [
+          "('policies', 'clear-text card number in column notes')"
+        ]
+      },
+      "duration_ms": 10.09
+    },
+    {
+      "id": "CP05",
+      "category": 24,
+      "category_name": "Privacy and Compliance Evidence",
+      "title": "CCPA/CPRA technical evidence references",
+      "status": "PASS",
+      "mandatory": false,
+      "disabled": false,
+      "message": "Evidence references present (technical evidence only; not a legal determination of compliance)",
+      "evidence": {},
+      "duration_ms": 0.01
+    }
+  ],
+  "disclaimer": "Automated technical evidence only. This report is not legal advice and does not establish compliance with GDPR, CCPA/CPRA, HIPAA, PCI DSS or any contract. AI commentary, if present, interprets results and never overrides deterministic checks. A human must approve the migration.",
+  "limitations": [
+    "Connectors: SQLite files only in 0.9.0 (SQL Server, PostgreSQL, BigQuery, Snowflake not implemented).",
+    "Rows are loaded in memory; million-row streaming/partitioned mode is not implemented.",
+    "Compliance and encryption items check that evidence references are declared; they do not verify them.",
+    "CDC late-arrival detection, split/merged-field detection and cloud cost/concurrency measurement are not implemented."
+  ],
+  "ai_commentary": null
+}
