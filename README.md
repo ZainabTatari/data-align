@@ -1,6 +1,6 @@
 # Data-Align
 
-[![tests](https://github.com/YOUR-USERNAME/data-align/actions/workflows/tests.yml/badge.svg)](https://github.com/YOUR-USERNAME/data-align/actions)
+[![tests](https://github.com/ZainabTatari/data-align/actions/workflows/tests.yml/badge.svg)](https://github.com/ZainabTatari/data-align/actions)
 
 **An open-source data-migration auditor. Deterministic checks prove; AI only explains.**
 
