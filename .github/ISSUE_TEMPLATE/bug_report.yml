@@ -1,0 +1,21 @@
+name: Bug or wrong result
+description: Data-Align gave a wrong, missing or confusing result
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you! I'm a tester, not a developer, so please describe it in plain words. **Never paste real personal data.**
+  - type: textarea
+    id: what
+    attributes: {label: What happened?, description: What did you expect and what did you get?}
+    validations: {required: true}
+  - type: input
+    id: case
+    attributes: {label: Test case ID (if any), placeholder: e.g. H01}
+  - type: dropdown
+    id: db
+    attributes: {label: Database, options: [SQLite, PostgreSQL, Other]}
+  - type: input
+    id: ver
+    attributes: {label: Data-Align version, placeholder: e.g. 0.9.0}
