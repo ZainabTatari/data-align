@@ -1,7 +1,6 @@
 # Data-Align
 
-[![tests](https://github.com/YOUR-USERNAME/data-align/actions/workflows/tests.yml/badge.svg)](https://github.com/YOUR-USERNAME/data-align/actions)
-
+[![tests](https://github.com/ZainabTatari/data-align/actions/workflows/tests.yml/badge.svg)](https://github.com/ZainabTatari/data-align/actions)
 **An open-source data-migration auditor. Deterministic checks prove; AI only explains.**
 
 Data-Align compares a source database with a migrated target across **24 testing categories (92 test cases)**:
@@ -14,7 +13,7 @@ compliance evidence. Every case ends as **PASS, FAIL, REVIEW or NOT_TESTED**, an
 > Version **0.9.0**. Honest status, including what is *not* built yet: [docs/STATUS.md](docs/STATUS.md).
 > Reports never contain raw data values; PII is compared as HMAC-SHA-256 tokens; the AI only ever sees results, never rows.
 
-## Try it in 2 minutes (nothing to install except Docker Desktop)
+## Try it in 2 minutes (needs Python 3.11+ or Docker Desktop)
 
 Windows: double-click **`run-demo.bat`**, or in PowerShell inside this folder:
 ```powershell
