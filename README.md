@@ -1,38 +1,52 @@
 # Data-Align
 
 [![tests](https://github.com/ZainabTatari/data-align/actions/workflows/tests.yml/badge.svg)](https://github.com/ZainabTatari/data-align/actions)
+
 **An open-source data-migration auditor. Deterministic checks prove; AI only explains.**
 
-Data-Align compares a source database with a migrated target across **24 testing categories (92 test cases)**:
-row counts, keys, schema mapping, field-by-field values, data quality, exact-decimal aggregates, SHA-256 row hashes,
-timestamps, positive/negative/boundary cases, decimal precision, PII discovery, HMAC-based PII reconciliation,
-security, referential integrity, ETL rules, CDC, schema evolution, encoding, lineage, performance, resilience and
-compliance evidence. Every case ends as **PASS, FAIL, REVIEW or NOT_TESTED**, and the whole run as
-**PASS / FAIL / REVIEW_REQUIRED / INCOMPLETE**. A disabled or unrun mandatory test can never produce a PASS.
+Data-Align compares an old database with a migrated one across **24 testing categories (92 test cases)**: row counts, keys, schema mapping, field-by-field values, data quality, exact-decimal aggregates, SHA-256 row hashes, timestamps, positive/negative/boundary cases, decimal precision, PII discovery, HMAC-based PII reconciliation, security, referential integrity, ETL rules, CDC, schema evolution, encoding, lineage, performance, resilience and compliance evidence.
+
+Every case ends as **PASS, FAIL, REVIEW or NOT_TESTED**, and the whole run as **PASS / FAIL / REVIEW_REQUIRED / INCOMPLETE**. A disabled or unrun mandatory test can never produce a PASS.
 
 > Version **0.9.0**. Honest status, including what is *not* built yet: [docs/STATUS.md](docs/STATUS.md).
 > Reports never contain raw data values; PII is compared as HMAC-SHA-256 tokens; the AI only ever sees results, never rows.
 
-## Try it in 2 minutes (needs Python 3.11+ or Docker Desktop)
+## Who is this for?
+Teams that must **prove** a data migration was correct - for example insurance, utilities and healthcare - and need repeatable sign-off evidence, not just "it looked fine". Works with SQLite, CSV files and PostgreSQL.
 
-Windows: double-click **`run-demo.bat`**, or in PowerShell inside this folder:
-```powershell
-python -m dataalign demo --out dataalign_output   # or, with Docker running: docker run --rm -v "${PWD}:/app" -w /app python:3.12-slim python -m dataalign demo --out dataalign_output
+## Three ways to use it
+
+| | Best for | Start here |
+|---|---|---|
+| **1. Demo** | See what it does in 2 minutes | double-click `run-demo.bat` |
+| **2. Easy mode (no coding)** | Audit your own data | put data in `mydata/old` and `mydata/new`, double-click `run-mydata.bat` |
+| **3. Command line / Langflow** | Advanced settings, PostgreSQL, automation | see below |
+
+### 1. Try the demo (needs Python 3.11+ or Docker Desktop)
+Windows: double-click **`run-demo.bat`** (it uses Python if installed, otherwise Docker Desktop). Or in a terminal:
 ```
-With Python 3.11+ already installed: `python -m dataalign demo`
+python -m dataalign demo --out dataalign_output
+```
+It builds a synthetic insurance database, migrates it cleanly (**PASS**) and again with about 30 planted defects (**FAIL**: missing rows, truncated text, float drift, mojibake, orphans, a leaked API key, a stale CDC watermark...). Open `dataalign_output/defective/report.html`. A pre-made copy is in [docs/sample_report](docs/sample_report/).
 
-It builds a synthetic insurance database, migrates it cleanly (**PASS**) and again with ~30 planted defects
-(**FAIL**: missing rows, truncated text, float drift, mojibake, orphans, a leaked API key, a stale CDC watermark...).
-Open `dataalign_output/defective/report.html`. A pre-made copy is in [docs/sample_report](docs/sample_report/).
+### 2. Audit your own data (no coding)
+1. Put your **old** data in `mydata/old` and your **new** data in `mydata/new`. Each can be one database file (`.db`) or CSV files, one per table.
+2. Optional: copy `mydata/rules_example.csv` to `mydata/rules.csv` and edit it in Excel to add your own business rules.
+3. Double-click **`run-mydata.bat`**. Your report opens in the browser.
 
-## Use it on your own data
-```bash
+Details: [docs/EASY_MODE.md](docs/EASY_MODE.md). Advanced rules: [docs/BUSINESS_RULES.md](docs/BUSINESS_RULES.md).
+Without rules and evidence documents, easy mode reports **INCOMPLETE** rather than PASS for identical data - it never claims a pass it did not prove.
+
+### 3. Command line, PostgreSQL and Langflow
+```
 python -m dataalign init-suite my_suite.json     # choose which categories/cases are active, add custom SQL cases
 python -m dataalign list-cases                   # see all 92 cases
-export DATAALIGN_HMAC_KEY=$(python -c "import secrets;print(secrets.token_hex(32))")   # key stays in your environment
-python -m dataalign run --config my_config.json --suite my_suite.json --out results [--resume] [--ai] [--pdf]
+python -m dataalign run --config my_config.json --suite my_suite.json --out results [--resume]
 ```
 `suites/example_config.json` shows every setting. Exit code is 0 only when the overall result is PASS.
+
+- **PostgreSQL:** `pip install pg8000`, put the connection URL in an environment variable (never in the config file). See [docs/PILOT.md](docs/PILOT.md).
+- **Langflow (optional visual front end):** import the flow from [integrations/langflow](integrations/langflow/README.md). It can run the demo, your `mydata` folder (with `rules.csv`) or a config file. Tested on Langflow 1.13.
 
 ## Principles
 - **AI interprets, code proves.** The optional local model (Ollama) writes a plain-English summary. It cannot change a status.
@@ -44,21 +58,10 @@ python -m dataalign run --config my_config.json --suite my_suite.json --out resu
 ## Tests
 `python -m unittest discover -s tests -v` (80 tests; 6 of them need a PostgreSQL server and skip otherwise; passes on Python 3.11, 3.12, 3.13). See [docs/STATUS.md](docs/STATUS.md) for what they prove.
 
-## Langflow visual flow
-The original no-code flow (Langflow + Ollama + Gotenberg) is described in [docs/GUIDE.md](docs/GUIDE.md); it is
-optional and **not yet verified end to end** against this engine.
-
-License: MIT. Contributing: [CONTRIBUTING.md](CONTRIBUTING.md).
-
-
-## Audit your own data (no coding)
-Put old data in `mydata/old`, new data in `mydata/new` (a `.db` file or CSV files), double-click `run-mydata.bat`. Details: [docs/EASY_MODE.md](docs/EASY_MODE.md). To add your own business rules: [docs/BUSINESS_RULES.md](docs/BUSINESS_RULES.md).
-
-## Optional: use it from Langflow
-Prefer clicking to typing? Import the ready-made flow from [integrations/langflow](integrations/langflow/README.md) and run the audit from a Langflow canvas. It can audit the demo data or your own `mydata` folder (with `rules.csv`). Tested on Langflow 1.13.
-
-## Who is this for?
-Teams that must **prove** a data migration was correct - for example insurance, utilities and healthcare - and need repeatable sign-off evidence, not just "it looked fine". Supports SQLite and PostgreSQL (`pip install pg8000`).
+## What is not verified yet
+The optional Ollama AI summary and the Gotenberg PDF export are built but not verified end to end. The original Langflow + Ollama + Gotenberg flow in [docs/GUIDE.md](docs/GUIDE.md) is not connected to this engine; use the Langflow box above instead. Full list: [docs/STATUS.md](docs/STATUS.md).
 
 ## Feedback welcome
-Data-Align was built by a **tester, not a developer**, with AI assistance. The checks are deterministic and tested (see `docs/STATUS.md` for what is and is not covered). Corrections, bug reports and pilot feedback are very welcome - open an issue or see `docs/PILOT.md`. MIT licensed.
+Data-Align was built by a **tester, not a developer**, with AI assistance. The checks are deterministic and tested. Corrections, bug reports and pilot feedback are very welcome - open an issue or see [docs/PILOT.md](docs/PILOT.md).
+
+License: MIT. Contributing: [CONTRIBUTING.md](CONTRIBUTING.md).
